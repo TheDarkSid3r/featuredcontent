@@ -426,7 +426,7 @@
 
                     var contentWrapper = $("<div/>").addClass("list content-list").appendTo(".wrapper");
                     content.forEach((e, i) => {
-                        var w = $("<div/>").addClass("content-entry").css({ backgroundImage: "url(images/back".concat(i % 6 + 1, ".svg)") }).appendTo(contentWrapper);
+                        var w = $("<div/>").addClass("content-entry").css({ backgroundImage: "url(images/back".concat(getRndInteger(1, 3), ".svg)") }).appendTo(contentWrapper);
                         var title = $("<div/>").addClass("content-entry-title").html(e.title).appendTo(w);
                         var id = $("<div/>").addClass("content-entry-id").html(formatContentId(e.contentId)).appendTo(w);
                         var date = $("<div/>").addClass("content-entry-date").html(dt(e.published)).appendTo(w);
