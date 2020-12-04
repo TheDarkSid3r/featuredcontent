@@ -1,0 +1,34 @@
+@font-face {
+    src: url(1_RockwellItal_Rockwell\ Std\ Italic.ttf);
+    font-family: "Rockwell";
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    src: url(2_RockwellStd_Rockwell\ Std.ttf);
+    font-family: "Rockwell";
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    src: url(3_LangoPx_Lango\ Px\ Bold.ttf);
+    font-family: "Lango Px";
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    src: url(4_RockwellExtraBold_Rockwell\ Std\ Extra\ Bold.ttf);
+    font-family: "Rockwell";
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    src: url(5_RockwellCondBold_Rockwell\ Std\ Bold\ Condensed.ttf);
+    font-family: "Rockwell";
+    font-weight: 700;
+    font-style: normal;
+}

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiplash 3 Featured Content</title>
+</head>
+
+<style>
+    @import url(fonts/fonts.css);
+
+    body {
+        margin: 0;
+        color: #3F1C41;
+        background-color: #E2C3FE;
+    }
+
+    * {
+        font-family: "Rockwell";
+        line-height: 100%;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: auto;
+        text-align: center;
+        box-sizing: border-box;
+        padding: 20px 30px;
+        font-weight: 900;
+        font-size: 50px;
+        color: #fff;
+        text-shadow: 4px 4px 0 #3F1C41;
+        background-size: 100% 100%;
+        background-image: url(images/back1.svg);
+        z-index: 5;
+    }
+
+    .backer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 4;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        opacity: 0.8;
+    }
+
+    .wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background-color: #E2C3FE;
+        box-sizing: border-box;
+        padding: 50px 30px;
+        overflow-y: auto;
+        text-align: center;
+    }
+
+    .list {
+        position: relative;
+        width: 800px;
+        height: auto;
+        box-sizing: border-box;
+        max-width: 100%;
+        margin: auto;
+    }
+
+    .content-entry {
+        position: relative;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        background-size: 0;
+        text-align: left;
+        cursor: pointer;
+        padding: 15px;
+    }
+
+    .content-entry.content-entry-isnew {
+        margin-top: 30px;
+    }
+
+    .content-entry-title {
+        position: relative;
+        box-sizing: border-box;
+        font-weight: 900;
+        font-size: 30px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: calc(100% - 100px);
+        white-space: nowrap;
+        padding-bottom: 7px;
+    }
+
+    .content-entry-id {
+        position: relative;
+        box-sizing: border-box;
+        color: #A35FDE;
+        font-weight: 700;
+        font-size: 18px;
+        padding-bottom: 5px;
+    }
+
+    .content-entry-date {
+        position: relative;
+        box-sizing: border-box;
+        font-weight: 700;
+        font-size: 24px;
+    }
+
+    .content-entry-play {
+        position: absolute;
+        top: 18px;
+        right: 15px;
+        width: 90px;
+        height: 70px;
+        background-image: url(images/playoutline.svg);
+        background-size: 0;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        font-weight: 900;
+        font-size: 17px;
+        line-height: 96px;
+        color: #91719F;
+        text-shadow: -2px 0.5px 0 #C392EE;
+    }
+
+    .content-entry-play::after,
+    .content-entry-play::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 15px;
+        top: 17px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .content-entry-play::after {
+        background-image: url(images/playarrow1.svg);
+        transform: rotate(-90deg) scale(0.85) translateX(-3px);
+    }
+
+    .content-entry-play::before {
+        background-image: url(images/playarrow2.svg);
+        transform: rotate(-90deg);
+        opacity: 0;
+    }
+
+    .content-entry-new {
+        position: absolute;
+        top: -30px;
+        left: -50px;
+        font-size: 20px;
+        font-weight: 900;
+        text-align: center;
+        box-sizing: border-box;
+        width: 120px;
+        height: 56px;
+        white-space: nowrap;
+        overflow: hidden;
+        background-image: url(images/new.png);
+        background-size: 100% 300%;
+        animation: content-entry-new 0.3s steps(3) infinite;
+        transform: rotate(-10deg) scale(0.8);
+        pointer-events: none;
+        z-index: 5;
+    }
+
+    .content-entry-new>span {
+        color: #fff;
+        position: absolute;
+        width: 105%;
+        left: 0;
+        top: 46%;
+        text-shadow: 1.5px -1.5px 0 #771E2D;
+        transform: translateY(-50%) skewY(3deg);
+        z-index: 2;
+    }
+
+    @keyframes content-entry-new {
+        0% {
+            background-position: 0 0%;
+        }
+
+        100% {
+            background-position: 0 150%;
+        }
+    }
+
+    .content-entry:hover {
+        background-size: 100% 100%;
+    }
+
+    .content-entry:hover>.content-entry-title {
+        color: #fff;
+        text-shadow: 2.5px 2.5px 0 #3F1C41;
+    }
+
+    .content-entry:hover>.content-entry-id {
+        color: #DFC6F5;
+    }
+
+    .content-entry:hover>.content-entry-play {
+        font-size: 20px;
+        background-size: 100% 100%;
+        color: #3F1C41;
+        text-shadow: -2px 0.5px 0 #A35FDE;
+    }
+
+    .content-entry:hover>.content-entry-play::after {
+        opacity: 0;
+    }
+
+    .content-entry:hover>.content-entry-play::before {
+        opacity: 1;
+    }
+
+    .prompt-title {
+        font-weight: 900;
+        font-size: 30px;
+        padding-bottom: 15px;
+        word-wrap: break-word;
+        color: #601877;
+    }
+
+    .prompt-id {
+        font-weight: 700;
+        font-size: 48px;
+        padding-bottom: 50px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-shadow: -2px 1px 0 #A35FDE;
+    }
+
+    @media only screen and (max-width: 400px) {
+        .prompt-id {
+            color: transparent;
+            text-shadow: none;
+        }
+    }
+
+    .prompt-list {
+        box-sizing: border-box;
+        padding: 10px;
+        background-color: #F6DAFF;
+        border-radius: 10px;
+        box-shadow: 7px 7px 0 #AA6FD9;
+        border-spacing: 0;
+    }
+
+    .prompt-text {
+        text-align: left;
+        font-size: 20px;
+        padding: 14px 7px;
+        font-weight: 700;
+        color: #000;
+        display: inline-block;
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .prompt-text-row:nth-child(even)>.prompt-text {
+        background-color: #D7A6FF;
+        border-radius: 7px;
+    }
+
+    .prompt-text.prompt-text-thriplash::after {
+        content: "";
+        position: relative;
+        box-sizing: border-box;
+        display: inline-block;
+        width: 70px;
+        height: 20px;
+        background-image: url(images/thriplash.svg);
+        background-size: contain;
+        background-position: right;
+        background-repeat: no-repeat;
+        flex-grow: 1;
+    }
+
+    .prompt-back {
+        position: relative;
+        margin-right: 30px;
+        top: 18px;
+        width: 90px;
+        height: 70px;
+        background-image: url(images/playoutline.svg);
+        background-size: 100% 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        font-weight: 900;
+        font-size: 20px;
+        line-height: 96px;
+        color: #3F1C41;
+        text-shadow: -2px 0.5px 0 #A35FDE;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .prompt-back::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 15px;
+        top: 17px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url(images/backarrow.svg);
+        transform: rotate(90deg);
+        pointer-events: none;
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <div class="backer"></div>
+        <div class="loader"></div>
+    </div>
+
+    <script src="jquery.js"></script>
+    <script src="anime.js"></script>
+
+</body>
+<script>
+    var formatContentId = (id) => {
+        return [id.slice(0, 3), id.slice(3)].join("-");
+    };
+    function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    var dt = (s) => {
+        var d = new Date(s);
+        return [("0" + (d.getMonth() + 1)).slice(-2), ("0" + d.getDate()).slice(-2), d.getFullYear()].join("/");
+    };
+    var dt2 = (s) => {
+        var d = new Date(s);
+        return [d.toLocaleDateString(), d.toLocaleTimeString(), d.toLocaleTimeString([], { timeZoneName: "short" }).split(" ")[2]].join(" ");
+    };
+    //this._publishedDateTf.text = NumberUtil.toStringWithLeadingZeroes(_loc3_.month + 1,2) + "/" + NumberUtil.toStringWithLeadingZeroes(_loc3_.date,2) + "/" + _loc3_.fullYear;
+    $(() => {
+        anime.set(".loader", { translateX: "-50%", translateY: "-50%" });
+
+        var showLoader = (show, text, wait) => {
+            var noText = text === false;
+            if (show) {
+                return new Promise((resolve) => {
+                    $(noText ? ".backer" : ".loader,.backer").show();
+                    if (!noText) {
+                        $(".loader").html((text || "Connecting").concat("\u2026"));
+                        anime({
+                            targets: ".loader",
+                            keyframes: [
+                                { scaleX: 1.1, scaleY: 1, duration: 200, easing: "easeInOutQuart" },
+                                { scaleX: 1, duration: 100, easing: "easeInOutQuart" }
+                            ]
+                        });
+                        anime({
+                            targets: ".backer",
+                            opacity: 0.8,
+                            duration: 300,
+                            easing: "easeOutQuart",
+                            complete: () => wait ? setTimeout(() => resolve(), wait) : resolve()
+                        });
+                    } else setTimeout(() => resolve(), 300);
+                });
+            } else {
+                anime({
+                    targets: ".loader",
+                    keyframes: [
+                        { scaleX: 1.1, duration: 100, easing: "easeOutQuart" },
+                        { scaleX: 0, scaleY: 1.1, duration: 200, easing: "easeInOutQuart" }
+                    ]
+                });
+                anime({
+                    targets: ".backer",
+                    opacity: 0,
+                    duration: noText ? 0 : 300,
+                    easing: "easeInQuart",
+                    complete: () => $(".loader,.backer").hide()
+                });
+            }
+        };
+
+        var listName = "q3featured";
+        showLoader(true, "Connecting").then(() => {
+            $.getJSON("https://ecast.jackboxgames.com/api/v2/ugc/list/".concat(listName), (data) => {
+                if (!data.ok) return;
+                var content = data.body.entries;
+                console.log(content);
+
+                var numloaded = 0;
+                var oneloaded = () => {
+                    if (++numloaded == content.length) doneloading();
+                };
+                content.forEach((c) => {
+                    $.getJSON("https://ecast.jackboxgames.com/storage/content/".concat(c.contentId), (d) => {
+                        c.data = d.blob.content;
+                        oneloaded();
+                    });
+                });
+                var doneloading = () => {
+                    showLoader(false);
+
+
+                    var contentWrapper = $("<div/>").addClass("list content-list").appendTo(".wrapper");
+                    content.forEach((e, i) => {
+                        var w = $("<div/>").addClass("content-entry").css({ backgroundImage: "url(images/back".concat(i % 6 + 1, ".svg)") }).appendTo(contentWrapper);
+                        var title = $("<div/>").addClass("content-entry-title").html(e.title).appendTo(w);
+                        var id = $("<div/>").addClass("content-entry-id").html(formatContentId(e.contentId)).appendTo(w);
+                        var date = $("<div/>").addClass("content-entry-date").html(dt(e.published)).appendTo(w);
+                        var play = $("<div/>").addClass("content-entry-play").html("VIEW").appendTo(w);
+                        /* var isNew = i == 0;
+                        if (isNew) {
+                            w.addClass("content-entry-isnew")
+                            var newIcon = $("<div/>").addClass("content-entry-new").html("<span>NEW</span>").appendTo(w);
+                        } */
+
+                        anime({
+                            targets: w[0],
+                            keyframes: [
+                                { translateY: -20, opacity: 0, duration: 0, delay: i * 30 },
+                                { translateY: 10, opacity: 1, duration: 200, easing: "easeInQuart" },
+                                { translateY: 0, duration: 200, easing: "easeOutQuart" }
+                            ],
+                        });
+
+                        w.on("click", () => {
+                            showPrompts(e);
+                        });
+                    });
+
+                    var showPrompts = (e) => {
+                        anime({
+                            targets: contentWrapper[0],
+                            translateY: 20,
+                            opacity: 0,
+                            easing: "easeInQuart",
+                            duration: 300,
+                            complete: () => contentWrapper.hide()
+                        });
+                        showLoader(true, false).then(() => {
+                            showLoader(false, false);
+                            var promptWrapper = $("<div/>").addClass("list prompt-wrapper").appendTo(".wrapper");
+                            anime({
+                                targets: promptWrapper[0],
+                                translateX: [20, 0],
+                                opacity: [0, 1],
+                                easing: "easeOutQuart",
+                                duration: 300
+                            });
+                            var back = $("<div/>").addClass("prompt-back").html("BACK");
+                            var id = $("<div/>").addClass("prompt-id").append(back, formatContentId(e.contentId)).appendTo(promptWrapper);
+                            var prompts = $("<table/>").addClass("prompt-list").appendTo(promptWrapper);
+                            var titlerow = $("<tr/>").addClass("prompt-title-row").appendTo(prompts);
+                            var title = $("<div/>").addClass("prompt-title").html(e.title).appendTo(titlerow);
+                            e.data.forEach((p) => {
+                                var row = $("<tr/>").addClass("prompt-text-row").appendTo(prompts);
+                                var htmlUnescape = (t) => t.replace(/&quot;/gi, "\"").replace(/&#39;/gi, "\'").replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/&amp;/gi, "&");
+                                var _loc3_ = "&lt;PLAYER&gt;";
+                                var promptText = htmlUnescape(p.prompt).replace(/<BLANK>/gi, "_______").replace(/<ANY PLAYER>/gi, _loc3_).replace(/<ANYPLAYER>/gi, _loc3_);
+                                var text = $("<td/>").addClass("prompt-text").html($("<span/>").html(promptText)).appendTo(row);
+                                if (p.type == "thriplash") text.addClass("prompt-text-thriplash");
+                            });
+                            back.on("click", () => {
+                                anime({
+                                    targets: promptWrapper[0],
+                                    translateX: -20,
+                                    opacity: 0,
+                                    easing: "easeInQuart",
+                                    duration: 300,
+                                    complete: () => promptWrapper.remove()
+                                });
+                                showLoader(true, false).then(() => {
+                                    showLoader(false, false);
+                                    anime({
+                                        targets: contentWrapper.show()[0],
+                                        keyframes: [
+                                            { translateY: -20, opacity: 0, duration: 0 },
+                                            { translateY: 10, opacity: 1, duration: 200, easing: "easeInQuart" },
+                                            { translateY: 0, duration: 200, easing: "easeOutQuart" }
+                                        ]
+                                    });
+                                });
+                            });
+                        });
+                        console.log(e);
+                    };
+
+                };
+            });
+        });
+    });
+</script>
+
+</html>
